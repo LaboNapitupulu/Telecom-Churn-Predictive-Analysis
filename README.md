@@ -1,5 +1,10 @@
 # Telco Customer Churn Prediction: Multi-Model Analysis & Interpretability
 
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue?style=flat-square&logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-Data_Manipulation-150458?style=flat-square&logo=pandas)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine_Learning-F7931E?style=flat-square&logo=scikit-learn)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=flat-square&logo=jupyter)
+
 **Domain:** Business Intelligence & Telecommunication | **Tech Stack:** Python, Scikit-Learn, Machine Learning
 
 ## Project Overview

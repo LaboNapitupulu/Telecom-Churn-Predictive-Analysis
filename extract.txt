@@ -1,0 +1,16 @@
+import json
+
+with open("RC_AIProject.ipynb", "r", encoding="utf-8") as f:
+    nb = json.load(f)
+
+for idx, cell in enumerate(nb.get("cells", [])):
+    if cell.get("cell_type") == "markdown":
+        print(f"--- Markdown Cell {idx} ---")
+        print("".join(cell.get("source", [])))
+    elif cell.get("cell_type") == "code":
+        source = "".join(cell.get("source", []))
+        if "#" in source: # only print code with comments
+            print(f"--- Code Cell {idx} (Comments) ---")
+            for line in source.splitlines():
+                if "#" in line:
+                    print(line.strip())

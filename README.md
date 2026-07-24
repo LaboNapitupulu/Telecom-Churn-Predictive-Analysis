@@ -1,38 +1,41 @@
-# 📊 Telco Customer Churn Prediction: Multi-Model Analysis & Interpretability
-> **Domain:** Business Intelligence & Telecommunication | **Tech Stack:** Python, Scikit-Learn, Machine Learning
+# Telco Customer Churn Prediction: Multi-Model Analysis & Interpretability
 
-## 📌 Ringkasan Proyek
-Proyek ini bertujuan untuk membangun model prediktif yang mampu mengidentifikasi pelanggan yang berisiko berhenti berlangganan (*churn*) pada perusahaan telekomunikasi[cite: 2]. Dengan menggunakan dataset yang mencakup 7.043 pelanggan, proyek ini mensimulasikan siklus hidup proyek *Data Science* secara *end-to-end*, mulai dari pembersihan data kotor hingga analisis strategi retensi pelanggan berdasarkan hasil model[cite: 2].
+**Domain:** Business Intelligence & Telecommunication | **Tech Stack:** Python, Scikit-Learn, Machine Learning
 
-## 🛠️ Tech Stack & Library
-*   **Bahasa:** Python 3.11[cite: 2]
-*   **Manipulasi Data:** Pandas, NumPy[cite: 2]
-*   **Visualisasi:** Matplotlib, Seaborn[cite: 2]
-*   **Machine Learning:** Scikit-Learn (Logistic Regression, Decision Tree, KNN)[cite: 2]
-*   **Interpretability:** SHAP & Decision Rules Visualization[cite: 2]
+## Project Overview
 
-## 🚀 Alur Kerja Proyek
+This project aims to build a predictive model capable of identifying customers who are at risk of terminating their subscription (churn) at a telecommunications company. Utilizing a dataset encompassing 7,043 customers, this project simulates an end-to-end Data Science project lifecycle, ranging from raw data cleaning to the formulation of customer retention strategies based on the model's findings.
+
+## Tech Stack & Libraries
+
+*   **Language:** Python
+*   **Data Manipulation:** Pandas, NumPy
+*   **Visualization:** Matplotlib, Seaborn
+*   **Machine Learning:** Scikit-Learn (Logistic Regression, Decision Tree, KNN)
+*   **Interpretability:** SHAP & Decision Rules Visualization
+
+## Project Workflow
 
 ### 1. Data Understanding & Cleaning
-*   **Penanganan Anomali:** Mengidentifikasi dan memperbaiki kolom `TotalCharges` yang terbaca sebagai *object* (string) karena adanya karakter spasi kosong pada pelanggan baru (*tenure* 0)[cite: 2].
-*   **Imputasi:** Melakukan konversi tipe data ke numerik dan mengisi *missing values* dengan nilai 0 berdasarkan logika bisnis[cite: 2].
+*   **Anomaly Handling:** Identified and corrected the `TotalCharges` column, which was read as a string object due to empty space characters for new customers (tenure 0).
+*   **Imputation:** Converted data types to numeric and filled missing values with 0 based on business logic.
 
 ### 2. Exploratory Data Analysis (EDA)
-*   **Class Imbalance:** Menemukan bahwa target bersifat tidak seimbang dengan rasio 73.5% (Setia) berbanding 26.5% (Churn)[cite: 2].
-*   **Insight Utama:** Pelanggan dengan kontrak bulanan (*month-to-month*) dan pengguna layanan *Fiber Optic* memiliki probabilitas *churn* yang jauh lebih tinggi dibandingkan segmen lainnya[cite: 2].
+*   **Class Imbalance:** Discovered that the target variable is imbalanced, with a ratio of 73.5% (Retained) to 26.5% (Churn).
+*   **Key Insights:** Customers with month-to-month contracts and Fiber Optic service users exhibit a significantly higher churn probability compared to other segments.
 
 ### 3. Data Preprocessing
-*   **Encoding:** Menggunakan *One-Hot Encoding* dengan `drop_first=True` untuk mengubah 20 fitur kategorikal menjadi 31 fitur numerik tanpa terjebak dalam *Dummy Variable Trap*[cite: 2].
-*   **Scaling:** Menerapkan `StandardScaler` (Z-Score Normalization) untuk menyeragamkan skala fitur numerik guna mengoptimalkan algoritma berbasis jarak (KNN) dan gradien (Logistic Regression)[cite: 2].
-*   **Stratified Splitting:** Membagi data (80:20) dengan menjaga proporsi kelas target[cite: 2].
+*   **Encoding:** Applied One-Hot Encoding with `drop_first=True` to transform 20 categorical features into 31 numerical features while avoiding the Dummy Variable Trap.
+*   **Scaling:** Implemented `StandardScaler` (Z-Score Normalization) to standardize the scale of numerical features, thereby optimizing distance-based (KNN) and gradient-based (Logistic Regression) algorithms.
+*   **Stratified Splitting:** Partitioned the data (80:20) while maintaining the original target class proportions.
 
 ### 4. Modeling & Optimization
-Mengevaluasi tiga algoritma berbeda dengan optimasi hiperparameter:
-*   **K-Nearest Neighbors (KNN):** Menggunakan `GridSearchCV` untuk menemukan nilai $K$ optimal ($K=21$)[cite: 2].
-*   **Decision Tree:** Membatasi `max_depth` untuk mencegah *overfitting*[cite: 2].
-*   **Logistic Regression:** Sebagai model *baseline* linear yang robust[cite: 2].
+Evaluated three different algorithms with hyperparameter optimization:
+*   **K-Nearest Neighbors (KNN):** Utilized `GridSearchCV` to determine the optimal $K$ value ($K=21$).
+*   **Decision Tree:** Restricted `max_depth` to mitigate overfitting risks.
+*   **Logistic Regression:** Served as a robust linear baseline model.
 
-## 📈 Hasil Evaluasi Model
+## Model Evaluation Results
 
 | Model | Test Accuracy | CV Mean Accuracy | AUC-ROC Score |
 | :--- | :---: | :---: | :---: |
@@ -40,18 +43,30 @@ Mengevaluasi tiga algoritma berbeda dengan optimasi hiperparameter:
 | Decision Tree | 79.42% | 78.97% | 0.8267 |
 | KNN (Tuned) | 77.08% | 78.83% | 0.8105 |
 
-**Kesimpulan:** Logistic Regression memberikan performa terbaik dalam membedakan pelanggan yang akan *churn* dengan nilai AUC tertinggi (0.8418)[cite: 2].
+**Conclusion:** Logistic Regression yields the best performance in distinguishing potential churn customers, achieving the highest AUC score (0.8418).
 
-## 💡 Interpretabilitas & Rekomendasi Bisnis
-Berdasarkan analisis *Feature Importance* dan *Decision Rules*:
-1.  **Faktor Risiko:** Tagihan bulanan yang tinggi dan penggunaan layanan *Fiber Optic* adalah pendorong utama pelanggan untuk berhenti[cite: 2].
-2.  **Faktor Retensi:** Durasi berlangganan (*tenure*) yang lama dan kontrak jangka panjang (1-2 tahun) sangat efektif dalam menjaga loyalitas pelanggan[cite: 2].
-3.  **Strategi:** Perusahaan disarankan memberikan promo loyalitas pada bulan-bulan awal kontrak untuk meningkatkan *tenure* pelanggan baru[cite: 2].
+## Interpretability & Business Recommendations
 
-## 📁 Struktur Repositori
-```text
-.
-├── WA_Fn-UseC_-Telco-Customer-Churn.csv  # Dataset mentah
-├── RC_AIProject.ipynb                    # Notebook analisis lengkap
-└── README.md                             # Dokumentasi proyek
-```
+Based on Feature Importance and Decision Rules analysis:
+1.  **Risk Factors:** High monthly charges and the use of Fiber Optic services are the primary drivers for customer churn.
+2.  **Retention Factors:** Extended subscription duration (tenure) and long-term contracts (1-2 years) are highly effective in maintaining customer loyalty.
+3.  **Strategy:** It is recommended that the company provides loyalty promotions during the initial months of the contract to increase the tenure of new customers.
+
+---
+
+## How to Run
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/LaboNapitupulu/Telecom-Churn-Predictive-Analysis.git
+   cd Telecom-Churn-Predictive-Analysis
+   ```
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Open the Jupyter Notebook:
+   ```bash
+   jupyter notebook Telecom_Churn_Prediction.ipynb
+   ```
+4. Run all cells to view the output, exploratory analysis, and model evaluations.
